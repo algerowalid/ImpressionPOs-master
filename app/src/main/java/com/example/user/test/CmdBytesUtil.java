@@ -27,7 +27,7 @@ public class CmdBytesUtil {
 	    "CAN","EM","SUB","ESC","FS","GS","RS","US",
 	    "SP"
 	};
-	
+	// mofdification test
     public static byte[] getGbk(String paramString)
     {
 		byte[] arrayOfByte = null;
