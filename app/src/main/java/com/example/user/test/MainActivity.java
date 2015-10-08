@@ -16,14 +16,24 @@ public class MainActivity extends ActionBarActivity {
     }
 
 
-    public void print(View args0){
+    public void print0(View args0){
 
-
-        PrintUtil.printString("ROMAISSA");
+        String lien = "dev/ttyS1";
+        PrintUtil.printString("ROMAISSA", lien);
 
     }
+    public void print3(View args0){
 
+        String lien = "dev/ttyS3";
+        PrintUtil.printString("ROMAISSA",lien);
 
+    }
+    public void print4(View args0){
+
+        String lien = "dev/ttyS4";
+        PrintUtil.printString("ROMAISSA",lien);
+
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
