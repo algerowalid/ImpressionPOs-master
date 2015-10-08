@@ -2,9 +2,11 @@ package com.example.user.test;
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -16,24 +18,30 @@ public class MainActivity extends ActionBarActivity {
     }
 
 
-    public void print0(View args0){
+    public void print0(View args0) {
 
-        String lien = "dev/ttyS1";
-        PrintUtil.printString("ROMAISSA", lien);
 
-    }
-    public void print3(View args0){
+        Log.i("Messssage", "Romi ");
 
-        String lien = "dev/ttyS3";
-        PrintUtil.printString("ROMAISSA",lien);
+       SerialPortFinder a = new SerialPortFinder();
+       String[] dev = a.getAllDevices();
+        int comp = dev.length;
 
-    }
-    public void print4(View args0){
+        for( int i=0;i<comp;i++){
 
-        String lien = "dev/ttyS4";
-        PrintUtil.printString("ROMAISSA",lien);
+            String affiche = dev[i];
+            Toast.makeText(getApplicationContext(),affiche, Toast.LENGTH_LONG).show();
+        }
 
     }
+
+
+    public void print3(View args0) {
+
+        Log.i("Messssage", "Romi ");
+        PrintUtil.printDemo();
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.

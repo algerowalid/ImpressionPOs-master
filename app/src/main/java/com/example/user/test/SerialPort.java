@@ -51,7 +51,7 @@ public class SerialPort
 			Log.e(TAG, "native open returns null");
 			throw new IOException();
 		}
-		
+
 		mFileInputStream = new FileInputStream(mFd);
 		mFileOutputStream = new FileOutputStream(mFd);
 	}

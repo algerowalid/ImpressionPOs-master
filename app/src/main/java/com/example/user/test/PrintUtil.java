@@ -14,13 +14,13 @@ import java.util.Locale;
 public class PrintUtil
 {
 	private static SerialPort mSerialPortOp=null;
-	public  static String connex=null;
+
 	
     private static SerialPort getSerialPort() throws SecurityException, IOException, InvalidParameterException
 	{
 
 	    if (mSerialPortOp == null)
-	      mSerialPortOp = new SerialPort(new File(connex), 115200, 0, true); // /dev/ttyS1
+	      mSerialPortOp = new SerialPort(new File("/dev/ttyS1"), 115200, 0, true); // /dev/ttyS1
 	    return mSerialPortOp;
 	}
     
@@ -38,7 +38,7 @@ public class PrintUtil
 		byte[] arrayOfByte = null;
 		try 
 		{
-			arrayOfByte = paramString.getBytes("GBK");  //�������try�ڲſ���
+			arrayOfByte = paramString.getBytes("GBK");  //???????try??????
 		}
 		catch (Exception   ex) {
 			;
@@ -47,31 +47,31 @@ public class PrintUtil
     	
     }
 
-    public static byte[] CutPaper()   //��ֽ�� GS V 66D 0D
+    public static byte[] CutPaper()   //????? GS V 66D 0D
     {
       byte[] arrayOfByte =  new byte[] {0x1D, 0x56, 0x42, 0x00}; 
       return arrayOfByte;
     }
 
-    public static byte[] PrintBarcode(String paramString) //���� GS k
+    public static byte[] PrintBarcode(String paramString) //???? GS k
     {
       byte[] arrayOfByte = new byte[13 + paramString.length()];
-      //��������߶�
+      //??????????
       arrayOfByte[0] = 0x1D;
       arrayOfByte[1] = 'h';
-      arrayOfByte[2] = 0x60; //1��255
+      arrayOfByte[2] = 0x60; //1??255
      
-      //����������
+      //??????????
       arrayOfByte[3] = 0x1D;
       arrayOfByte[4] = 'w';
-      arrayOfByte[5] = 2; //2��6
+      arrayOfByte[5] = 2; //2??6
       
-      //�����������ִ�ӡλ��
+      //?????????????????
       arrayOfByte[6] = 0x1D;
       arrayOfByte[7] = 'H';
-      arrayOfByte[8] = 2; //0��3
+      arrayOfByte[8] = 2; //0??3
       
-      //��ӡ39����
+      //???39????
       arrayOfByte[9] = 0x1D;
       arrayOfByte[10] = 'k';
       arrayOfByte[11] = 0x45;
@@ -80,13 +80,13 @@ public class PrintUtil
       return arrayOfByte;
     }
     
-    public static byte[] setAlignCenter(char paramChar) //���� ESC a
+    public static byte[] setAlignCenter(char paramChar) //???? ESC a
     {
 		byte[] arrayOfByte = new byte[3]; 
 		arrayOfByte[0] = 0x1B;
 		arrayOfByte[1] = 0x61;
 		
-		switch(paramChar)	//1-����룻2-���ж��룻3-�Ҷ���
+		switch(paramChar)	//1-?????2-???????3-?????
 		{
 			case '2':
 				arrayOfByte[2] = 0x01;
@@ -101,12 +101,12 @@ public class PrintUtil
 		return arrayOfByte;
     }
 
-    public static byte[] setBold(boolean paramBoolean)  //�Ӵ� ESC E
+    public static byte[] setBold(boolean paramBoolean)  //??? ESC E
     {
       byte[] arrayOfByte = new byte[3]; 
       arrayOfByte[0] = 0x1B;
       arrayOfByte[1] = 0x45;
-      if (paramBoolean)				//��ʾ�Ӵ�
+      if (paramBoolean)				//??????
       {  
     	  arrayOfByte[2] = 0x01;
       }
@@ -117,7 +117,7 @@ public class PrintUtil
       return arrayOfByte;
      }
     
-    public static byte[] setLineH(int h)  //�����иߣ�h 0-255
+    public static byte[] setLineH(int h)  //????????h 0-255
     {
       byte[] arrayOfByte = new byte[3]; 
       arrayOfByte[0] = 0x1B;
@@ -126,13 +126,13 @@ public class PrintUtil
       return arrayOfByte;
      }
 
-    public static byte[] setWH(char paramChar) //GS ! ���ô�ӡ�ַ��С
+    public static byte[] setWH(char paramChar) //GS ! ???�???????
     {
-		byte[] arrayOfByte = new byte[3]; //GS ! 11H ���?��		
+		byte[] arrayOfByte = new byte[3]; //GS ! 11H ??????		
 		arrayOfByte[0] = 0x1D;
 		arrayOfByte[1] = 0x21;
 		
-		switch(paramChar)	//1-�ޣ�2-���?3-���ߣ� 4-���?��
+		switch(paramChar)	//1-???2-????3-????? 4-??????
 		{
 			case '2':
 				arrayOfByte[2] = 0x10;
@@ -152,18 +152,18 @@ public class PrintUtil
     }
 	 /***************************************************************************
 		    add by yidie   2012-01-10     
-		         ���ܣ����ô�ӡ���λ��
-		         ����
-		         int				�ڵ�ǰ�У���λ���λ�ã�ȡֵ��Χ0��576��
-		         ˵����
-				�����峣���С�£�ÿ����24�㣬Ӣ���ַ�12��
-				��λ�ڵ�n�����ֺ���position=24*n
-				��λ�ڵ�n������ַ����position=12*n
+		         ????????�????????
+		         ????
+		         int				???????????????�??????0??576??
+		         ?????
+				???????????�?�????24????????12??
+				??????n?????????position=24*n
+				??????n???????????position=12*n
 	  ****************************************************************************/   
     
 	public static byte[] setCusorPosition(int position)
 	{
-		byte[] returnText = new byte[4]; //��ǰ�У����þ�Դ�ӡλ�� ESC $ bL bH
+		byte[] returnText = new byte[4]; //?????????�??????? ESC $ bL bH
 		returnText[0] = 0x1B;
 		returnText[1] = 0x24;
 		returnText[2]=(byte)(position%256);
@@ -188,9 +188,9 @@ public class PrintUtil
     	return returnValue;
     }
    
-    public static boolean printString(String paramString, String ll)
+    public static boolean printString(String paramString)
     {
-		connex = ll;
+
     	return printBytes(getGbk(paramString));
     }
     
@@ -236,7 +236,7 @@ public class PrintUtil
 			System.arraycopy(oldText, 0,  printText,  iNum,  oldText.length);
 			iNum += oldText.length;
 					
-			oldText=getGbk("�����ţ�");
+			oldText=getGbk("5");
 			System.arraycopy(oldText, 0,  printText,  iNum,  oldText.length);
 			iNum += oldText.length;
 
@@ -257,7 +257,7 @@ public class PrintUtil
 			iNum += oldText.length;
 			
 			strTmp=new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.SIMPLIFIED_CHINESE).format(new Date());
-			oldText=getGbk(strTmp+"��ӡ\n\n");
+			oldText=getGbk(strTmp+"???\n\n");
 			System.arraycopy(oldText, 0,  printText,  iNum,  oldText.length);
 			iNum += oldText.length;
 			
@@ -273,7 +273,7 @@ public class PrintUtil
 			System.arraycopy(oldText, 0, printText,  iNum,  oldText.length);
 			iNum += oldText.length;
 			
-			oldText = getGbk("���������");
+			oldText = getGbk("?????????");
 			System.arraycopy(oldText, 0, printText,  iNum,  oldText.length);
 			iNum += oldText.length;
 
@@ -298,15 +298,15 @@ public class PrintUtil
 			iNum += oldText.length;
 			
 			strTmp=new SimpleDateFormat("yyyy-MM-dd", Locale.SIMPLIFIED_CHINESE).format(new Date());
-			oldText = getGbk("����ʱ�䣺"+strTmp+" �����ʹ�\n");
+			oldText = getGbk("???????"+strTmp+" ???????\n");
 			System.arraycopy(oldText, 0, printText,  iNum,  oldText.length);
 			iNum += oldText.length;
 
-			oldText = getGbk("���͵�ַ��������Ƽ���·6�Ŵ�ҵ����\n");
+			oldText = getGbk("??????????????????�6????????\n");
 			System.arraycopy(oldText, 0, printText,  iNum,  oldText.length);
 			iNum += oldText.length;
 			
-			oldText = getGbk("�ƺ��绰����������� 13501234567\n");
+			oldText = getGbk("???????????????? 13501234567\n");
 			System.arraycopy(oldText, 0, printText,  iNum,  oldText.length);
 			iNum += oldText.length;
 			
@@ -314,7 +314,7 @@ public class PrintUtil
 			System.arraycopy(oldText, 0, printText,  iNum,  oldText.length);
 			iNum += oldText.length;
 
-			oldText = getGbk("        Ʒ��            ����    ����    ���\n");
+			oldText = getGbk("        ???            ????    ????    ???\n");
 			System.arraycopy(oldText, 0, printText,  iNum,  oldText.length);
 			iNum += oldText.length;
 			
@@ -325,9 +325,9 @@ public class PrintUtil
 			oldText = setWH('3'); 
 			System.arraycopy(oldText, 0, printText,  iNum,  oldText.length);
 			iNum += oldText.length;
-			//��Ʒ�����10�����֣�20���ַ��������8���ַ��������4���ַ������8���ַ��м�ָ���2���ո�
+			//????????10???????20????????????8????????????4??????????8????????????2?????
 			
-			strTmp="��ݮ���̲���";			
+			strTmp="??????????";			
 			oldText=getGbk(strTmp);
 			System.arraycopy(oldText, 0,  printText,  iNum,  oldText.length);
 			iNum += oldText.length;
@@ -341,7 +341,7 @@ public class PrintUtil
 			System.arraycopy(oldText, 0,  printText,  iNum,  oldText.length);
 			iNum += oldText.length;
 			
-			strTmp="����ˮ��������";
+			strTmp="?????????????";
 			oldText=getGbk(strTmp);
 			System.arraycopy(oldText, 0,  printText,  iNum,  oldText.length);
 			iNum += oldText.length;
@@ -355,7 +355,7 @@ public class PrintUtil
 			System.arraycopy(oldText, 0,  printText,  iNum,  oldText.length);
 			iNum += oldText.length;
 			
-			strTmp="��Ƥ֥ʿ���";			
+			strTmp="????????";			
 			oldText=getGbk(strTmp);
 			System.arraycopy(oldText, 0,  printText,  iNum,  oldText.length);
 			iNum += oldText.length;
@@ -369,7 +369,7 @@ public class PrintUtil
 			System.arraycopy(oldText, 0,  printText,  iNum,  oldText.length);
 			iNum += oldText.length;
 			
-			strTmp="������ҵ���";			
+			strTmp="??????????";			
 			oldText=getGbk(strTmp);
 			System.arraycopy(oldText, 0,  printText,  iNum,  oldText.length);
 			iNum += oldText.length;
@@ -395,7 +395,7 @@ public class PrintUtil
 			System.arraycopy(oldText, 0, printText,  iNum,  oldText.length);
 			iNum += oldText.length;
 			
-			strTmp="�Ͳͷѣ�";			
+			strTmp="?????";			
 			oldText=getGbk(strTmp);
 			System.arraycopy(oldText, 0,  printText,  iNum,  oldText.length);
 			iNum += oldText.length;
@@ -409,7 +409,7 @@ public class PrintUtil
 			System.arraycopy(oldText, 0,  printText,  iNum,  oldText.length);
 			iNum += oldText.length;
 			
-			strTmp="�ܼƣ�";			
+			strTmp="????";			
 			oldText=getGbk(strTmp);
 			System.arraycopy(oldText, 0,  printText,  iNum,  oldText.length);
 			iNum += oldText.length;
@@ -423,7 +423,7 @@ public class PrintUtil
 			System.arraycopy(oldText, 0,  printText,  iNum,  oldText.length);
 			iNum += oldText.length;
 			
-			oldText = getGbk("��ע�������һ���Ե���\n");
+			oldText = getGbk("??????????????????\n");
 			System.arraycopy(oldText, 0, printText,  iNum,  oldText.length);
 			iNum += oldText.length;
 			
