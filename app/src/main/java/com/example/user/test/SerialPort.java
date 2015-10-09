@@ -44,7 +44,6 @@ public class SerialPort
 			}
 		}
 
-String lieeen = device.getAbsolutePath();
 
 
 		mFd = open(device.getAbsolutePath(), baudrate, flags, flowCon);
