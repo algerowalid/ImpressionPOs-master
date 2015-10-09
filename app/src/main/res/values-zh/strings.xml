@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">系统测试工具</string>
+    <string name="menu_settings">设置</string>
+    <string name="title_activity_main">系统测试工具</string>
+	<string name="light_info">测试红灯及蓝灯</string>
+	<string name="red">红灯测试</string>
+	<string name="blue">蓝灯测试</string>
+	<string name="fresh">闪烁测试</string>
+	<string name="save_info">图片文件已保存至SD卡中</string>
+	<string name="printInfo1">输入打印指令: </string>
+	<string name="printInfo2">选择打印指令: </string>
+	<string name="lightTestTitle">按箭头键将进行灯光测试，可以测试\n红灯开关、蓝灯开关及红蓝灯闪烁三\n种模式。</string>
+	<string name="printTestTitle">按箭头键将进行打印机测试，有小票\n演示打印，也可选择打印指令打印测\n试，也可输入约定指令打印测试。</string>
+	<string name="paintTestTitle">按箭头键将进行触摸屏测试，在屏幕\n上可以划线，支持双点触摸，可以随\n时清空屏幕及保存屏幕截图。</string>
+	<string name="soundTestTitle">按箭头键将进行声音播放测试，\n可随时播放、暂停、停止。\n&#160;&#160;</string>
+	<string name="displayTestTitle">按箭头键将进行屏幕坏点测试，触按\n屏幕依次改变颜色，完成一个周期后\n自动返回。</string>
+	<string-array name="print_cmd">
+	    <item>ABCDEFGH 川田科技 LF\n 打印并走纸一行</item>
+	    <item>GS ! 11H ABCDEFGH 川田科技 LF\n 设置倍宽倍高打印</item>
+	    <item>GS V 66D 0D\n 切纸指令</item>
+		<item>GS k 45H 0cH 201212120012\n 打印条码</item>
+	    <item>ESC p 0d 255d 255d\n 开钱箱</item>
+	</string-array>
+</resources>
